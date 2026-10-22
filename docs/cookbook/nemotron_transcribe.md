@@ -83,9 +83,12 @@ uses the seed as the decoder sampling seed. `word_timestamps=true` with
 succeeds. An omitted language is treated as English. Any other language is
 rejected. A missing head or a failed alignment returns
 `word_timestamp_alignment.status=unavailable` and does not invent times.
-`json` and `text` stay plain transcripts. Speaker-attributed output,
-subtitles, translation, speculative decoding, and `/v1/realtime` are outside
-this integration.
+`json` and `text` stay plain transcripts. `response_format=srt` or `vtt`
+asks for the same English word timestamps and renders Speech-style cues
+(at most 7 seconds, two lines, 42 graphemes per line). If alignment is
+unavailable the request fails instead of emitting one cue for the whole
+file. Speaker-attributed output, translation, speculative decoding, and
+`/v1/realtime` are outside this integration.
 
 ## Compile the encoder
 
