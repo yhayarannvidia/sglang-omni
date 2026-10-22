@@ -87,8 +87,13 @@ rejected. A missing head or a failed alignment returns
 asks for the same English word timestamps and renders Speech-style cues
 (at most 7 seconds, two lines, 42 graphemes per line). If alignment is
 unavailable the request fails instead of emitting one cue for the whole
-file. Speaker-attributed output, translation, speculative decoding, and
-`/v1/realtime` are outside this integration.
+file. Any word-timestamp request also returns post-processed
+`diarization_timestamps`. A prompt with at least two `<spk:N>` tags adds
+`speaker`, `speaker_slot`, and `speaker_confidence` on each word. A bare
+`<spk:0>` does not. A long tagged prompt that comes back without a tag is
+decoded once more, and the retry is kept only when it contains a tag.
+Translation, speculative decoding, and `/v1/realtime` are outside this
+integration.
 
 ## Compile the encoder
 
