@@ -171,6 +171,7 @@ def register_transcriptions(app: FastAPI) -> None:
                 temperature=form.temperature,
                 repetition_penalty=form.repetition_penalty,
                 max_new_tokens=form.max_new_tokens,
+                seed=form.seed,
                 stream=True,
             )
             return await speech_to_text.create_speech_to_text_streaming_response(
@@ -290,6 +291,7 @@ async def transcribe_planned_upload(
             temperature=form.temperature,
             repetition_penalty=form.repetition_penalty,
             max_new_tokens=form.max_new_tokens,
+            seed=form.seed,
             segment_timestamps=segment_timestamps,
         )
         result = await speech_to_text.complete_speech_to_text_request(
@@ -331,6 +333,7 @@ async def transcribe_planned_upload(
                 temperature=form.temperature,
                 repetition_penalty=form.repetition_penalty,
                 max_new_tokens=form.max_new_tokens,
+                seed=form.seed,
                 max_concurrent=chunking.max_concurrent_chunks,
                 condition_on_previous_text=chunking.condition_on_previous_text,
                 adapter=adapter,
@@ -426,6 +429,7 @@ def build_chunk_generate_request(
     temperature: float | None,
     repetition_penalty: float | None,
     max_new_tokens: int | None,
+    seed: int | None = None,
     stream: bool = False,
 ) -> GenerateRequest:
     return build_transcription_generate_request(
@@ -440,6 +444,7 @@ def build_chunk_generate_request(
         temperature=temperature,
         repetition_penalty=repetition_penalty,
         max_new_tokens=max_new_tokens,
+        seed=seed,
         stream=stream,
     )
 
@@ -456,6 +461,7 @@ async def transcribe_audio_chunks(
     temperature: float | None,
     repetition_penalty: float | None,
     max_new_tokens: int | None,
+    seed: int | None,
     max_concurrent: int,
     condition_on_previous_text: bool,
     adapter: TranscriptionAdapter,
@@ -496,6 +502,7 @@ async def transcribe_audio_chunks(
                 temperature=temperature,
                 repetition_penalty=repetition_penalty,
                 max_new_tokens=max_new_tokens,
+                seed=seed,
             )
             retry_suffix = "-retry" if retry else ""
             chunk_request_id = f"{request_id}-chunk-{span.index}{retry_suffix}"
