@@ -579,12 +579,22 @@ class TranscriptionUsage(BaseModel):
     seconds: int
 
 
+class TranscriptionWord(BaseModel):
+    """One forced-aligned word. Times are seconds."""
+
+    word: str
+    start: float
+    end: float
+
+
 class TranscriptionResponse(BaseModel):
     """OpenAI-compatible transcription response."""
 
     text: str
     usage: TranscriptionUsage | None = None
     finish_reason: str | None = None
+    words: list[TranscriptionWord] | None = None
+    word_timestamp_alignment: dict[str, str] | None = None
 
 
 class TranscriptionSegment(BaseModel):
@@ -604,6 +614,8 @@ class TranscriptionVerboseResponse(BaseModel):
     duration: float | None = None
     text: str
     segments: list[TranscriptionSegment] = Field(default_factory=list)
+    words: list[TranscriptionWord] | None = None
+    word_timestamp_alignment: dict[str, str] | None = None
     usage: TranscriptionUsage | None = None
     finish_reason: str | None = None
 

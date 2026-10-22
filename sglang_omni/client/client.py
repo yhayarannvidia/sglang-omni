@@ -211,6 +211,7 @@ class Client:
         omni_rollout: dict[str, object] | None = None
         weight_version: str | None = None
         language: str | None = None
+        transcription: dict[str, object] | None = None
 
         async for chunk in self.generate(request, request_id=request_id):
             last_chunk = chunk
@@ -224,6 +225,10 @@ class Client:
                 pass
             if chunk.sample_rate is not None:
                 sample_rate = chunk.sample_rate
+            else:
+                pass
+            if chunk.transcription is not None:
+                transcription = chunk.transcription
             else:
                 pass
             if chunk.finish_reason is not None:
@@ -294,6 +299,7 @@ class Client:
             weight_version=weight_version,
             language=language,
             diarization=last_chunk.diarization,
+            transcription=transcription,
         )
 
     # ------------------------------------------------------------------
@@ -790,6 +796,11 @@ class Client:
             language = result.get("language")
             if isinstance(language, str):
                 chunk.language = language
+            else:
+                pass
+            transcription = result.get("transcription")
+            if isinstance(transcription, dict):
+                chunk.transcription = transcription
             else:
                 pass
             Client.set_audio_data(chunk, result)

@@ -68,6 +68,25 @@ def test_build_request_leaves_seed_unset_by_default() -> None:
     assert build_request().sampling.seed is None
 
 
+def test_build_request_passes_word_timestamps() -> None:
+    req = speech_to_text.build_speech_to_text_generate_request(
+        audio_bytes=b"RIFF",
+        filename="sample.wav",
+        content_type="audio/wav",
+        model="nvidia/Nemotron-3.5-Transcribe-30B-A4B",
+        language="en",
+        prompt=None,
+        temperature=None,
+        word_timestamps=True,
+    )
+
+    assert req.extra_params["word_timestamps"] is True
+
+
+def test_build_request_leaves_word_timestamps_unset_by_default() -> None:
+    assert "word_timestamps" not in build_request().extra_params
+
+
 def test_transcription_builder_import_keeps_shared_callable() -> None:
     """Keep the pre-extraction import stable while stacked consumers migrate."""
     assert (
