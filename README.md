@@ -73,7 +73,7 @@ SGLang-Omni is a multi-stage serving runtime for omni, speech, and TTS models. I
 |---------|--------|-------|
 | **NVIDIA CUDA** | Supported | Default backend with full model coverage. |
 | **Apple Silicon** | Experimental | Qwen3-ASR runs through Torch MPS on macOS arm64. Install with [`install.sh`](./install.sh) and follow the [Qwen3-ASR guide](./docs/cookbook/qwen3_asr.md#apple-silicon). |
-| **Intel GPU (XPU)** | Experimental | Intel Arc GPUs via PyTorch XPU. **Qwen3-ASR, Qwen3-TTS, ZONOS2, and Qwen3-Omni serve end-to-end** (ZONOS2 with decode graphs; Omni thinker via multi-XPU tensor parallelism). Install per [Intel XPU guide](./docs/get_started/installation_xpu.md); the backend is auto-detected. |
+| **Intel GPU (XPU)** | Experimental | Intel Arc GPUs via PyTorch XPU. **Qwen3-ASR, Whisper ASR, Fun-ASR-Nano, Nemotron 3.5 ASR, MOSS-Transcribe-Diarize, Qwen3-TTS, Fun-CosyVoice3, ZONOS2, Audar-TTS, Qwen3-Omni, MiniMax Music 3, MiniCPM-o, Ming-Omni, Ming-Omni-TTS, Nemotron VoiceChat, PersonaPlex, AuK/AuK-Flash and dots.tts serve end-to-end**. The [Intel XPU guide](./docs/get_started/installation_xpu.md) has the install steps, each model's launch command and how many cards it needs; the backend is auto-detected. |
 
 Additional model guides, including experimental and research-oriented paths, are available in the [Cookbook](https://sgl-project.github.io/sglang-omni/).
 
@@ -81,12 +81,7 @@ Additional model guides, including experimental and research-oriented paths, are
 
 - [Installation](https://sgl-project.github.io/sglang-omni/get_started/installation.html)
 - [TTS usage](https://sgl-project.github.io/sglang-omni/basic_usage/tts.html)
-- [Qwen3-Omni usage](https://sgl-project.github.io/sglang-omni/basic_usage/qwen3_omni.html)
-- [Qwen3-ASR cookbook](https://sgl-project.github.io/sglang-omni/cookbook/qwen3_asr.html)
-- [Nemotron 3.5 ASR cookbook](https://sgl-project.github.io/sglang-omni/cookbook/nemotron3_5_asr.html)
-- [MOSS-Transcribe-Diarize cookbook](https://sgl-project.github.io/sglang-omni/cookbook/moss_transcribe_diarize.html)
-- [Omni router](https://sgl-project.github.io/sglang-omni/basic_usage/omni_router.html)
-- [Developer reference](https://sgl-project.github.io/sglang-omni/developer_reference/main.html)
+- [ASR cookbook](https://sgl-project.github.io/sglang-omni/cookbook/qwen3_asr.html)
 
 ## Community & Support
 
